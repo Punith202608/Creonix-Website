@@ -52,6 +52,8 @@
       <a href="https://www.youtube.com/@creonix" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5" /><path d="M10 9.2v5.6l4.8-2.8z" class="fill" /></svg></a>
     </div>
 
+    <button type="button" class="nav__admin" data-admin-open>Admin</button>
+
     <a class="nav__join" href="#contact">Join us <span aria-hidden="true">↗</span></a>
 
     <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -74,6 +76,7 @@
     <div class="mobile-menu__foot">
       <a class="btn btn--accent" href="#contact">Join us ↗</a>
       <a href="https://www.instagram.com/creonix.sjbit/" target="_blank" rel="noopener">@creonix.sjbit</a>
+      <button type="button" class="nav__admin nav__admin--menu" data-admin-open>Admin login</button>
     </div>
   </div>
 
@@ -328,6 +331,28 @@
   <!-- =====================================================
        EVENT DETAIL MODAL (filled by script.js when an archive card is clicked)
        ===================================================== -->
+  <!-- =====================================================
+       ADMIN LOGIN POP-UP (login via Supabase; after login it lists the Google Sheet links)
+       ===================================================== -->
+  <dialog class="admin" id="adminModal" aria-labelledby="adminTitle">
+    <button type="button" class="admin__close" data-admin-close aria-label="Close">✕</button>
+    <h2 class="admin__title" id="adminTitle">Admin</h2>
+
+    <form class="admin__form" id="adminForm">
+      <p class="admin__hint">Log in to open the club's editing sheets.</p>
+      <label>Email<input type="email" name="email" required autocomplete="username" /></label>
+      <label>Password<input type="password" name="password" required autocomplete="current-password" /></label>
+      <p class="admin__error" id="adminError" role="alert" hidden></p>
+      <button type="submit" class="btn btn--accent admin__submit">Log in</button>
+    </form>
+
+    <div class="admin__panel" id="adminPanel" hidden>
+      <p class="admin__hint">You're logged in. Open a sheet to edit the website:</p>
+      <ul class="admin__links" id="adminLinks"></ul>
+      <button type="button" class="admin__logout" id="adminLogout">Log out</button>
+    </div>
+  </dialog>
+
   <!-- =====================================================
        ABOUT THE CREATOR POP-UP (opened by "About Creator" in the hero strip)
        REPLACE: assets/creator.jpg (your photo), the name, the paragraph and the 4 links below
