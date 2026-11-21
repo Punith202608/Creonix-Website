@@ -119,45 +119,45 @@ const ARCHIVE_EVENTS = [
     date: '2026-11-14', venue: 'MBA Lawn', cover: 'assets/gallery/spectrum-26/cover.jpg',
     description: 'Three days, twelve stages and one very tired camera crew. We covered every performance, every crowd surge and every backstage moment of SJBIT’s biggest cultural fest — and turned it into an aftermovie seen across campus.',
     photos: photoSet('spectrum-26', 5),
-    videos: [{ title: 'Official Aftermovie', youtubeId: PLACEHOLDER_YT }],
-    reels: [{ title: 'Day 1 highlights', url: 'https://www.instagram.com/' }, { title: 'Pro-show reel', url: 'https://www.instagram.com/' }] },
+    videos: [],
+    reels: [] },
 
   { id: 'techverse-26', title: 'Techverse', subtitle: 'National Tech Symposium', category: 'technical',
     date: '2026-02-20', venue: 'Auditorium & Labs', cover: 'assets/gallery/techverse-26/cover.jpg',
     description: 'Robot wars, paper presentations and a keynote that filled the auditorium. Our team documented the projects, the people and the late-night builds.',
     photos: photoSet('techverse-26', 5),
-    videos: [{ title: 'Highlight film', youtubeId: PLACEHOLDER_YT }], reels: [] },
+    videos: [], reels: [] },
 
   { id: 'sports-meet-25', title: 'Annual Sports Meet', subtitle: 'Track & Field', category: 'sports',
     date: '2025-12-12', venue: 'SJBIT Grounds', cover: 'assets/gallery/sports-meet-25/cover.jpg',
     description: 'Photo finishes, relay drama and a record-breaking long jump — captured frame by frame from the sidelines.',
     photos: photoSet('sports-meet-25', 5), videos: [],
-    reels: [{ title: '100m final in slow-mo', url: 'https://www.instagram.com/' }] },
+    reels: [] },
 
   { id: 'freshers-25', title: 'Freshers’ Welcome', subtitle: 'Batch of 2029', category: 'other',
     date: '2025-10-03', venue: 'Open Air Theatre', cover: 'assets/gallery/freshers-25/cover.jpg',
     description: 'The first day for a new batch. We set up a photo booth, filmed the welcome show and made sure every fresher had a picture to post.',
     photos: photoSet('freshers-25', 5),
-    videos: [{ title: 'Welcome film', youtubeId: PLACEHOLDER_YT }], reels: [] },
+    videos: [], reels: [] },
 
   { id: 'codesprint-25', title: 'CodeSprint 24H', subtitle: 'Hackathon', category: 'technical',
     date: '2025-09-18', venue: 'CSE Block', cover: 'assets/gallery/codesprint-25/cover.jpg',
     description: 'Twenty-four hours, sixty teams and a lot of coffee. Our time-lapse of the night shift became one of our most-watched reels.',
     photos: photoSet('codesprint-25', 5), videos: [],
-    reels: [{ title: '24 hours in 30 seconds', url: 'https://www.instagram.com/' }] },
+    reels: [] },
 
   { id: 'rhythm-night-25', title: 'Rhythm Night', subtitle: 'Battle of the Bands', category: 'cultural',
     date: '2025-08-29', venue: 'Main Stage', cover: 'assets/gallery/rhythm-night-25/cover.jpg',
     description: 'Six bands, one trophy, and our photographers right at the barricade for every chord.',
     photos: photoSet('rhythm-night-25', 5),
-    videos: [{ title: 'Live set highlights', youtubeId: PLACEHOLDER_YT }],
-    reels: [{ title: 'Winning performance', url: 'https://www.instagram.com/' }] },
+    videos: [],
+    reels: [] },
 
   { id: 'cricket-cup-25', title: 'Inter-College Cricket Cup', subtitle: 'Finals', category: 'sports',
     date: '2025-04-11', venue: 'SJBIT Cricket Ground', cover: 'assets/gallery/cricket-cup-25/cover.jpg',
     description: 'A last-over finish and a pitch invasion we’ll never forget. Full match coverage plus player portraits.',
     photos: photoSet('cricket-cup-25', 5),
-    videos: [{ title: 'Final over', youtubeId: PLACEHOLDER_YT }], reels: [] },
+    videos: [], reels: [] },
 
   { id: 'convocation-25', title: 'Convocation 2025', subtitle: 'Graduation Day', category: 'other',
     date: '2025-03-01', venue: 'Convention Hall', cover: 'assets/gallery/convocation-25/cover.jpg',
@@ -726,7 +726,7 @@ function setFooterYear() {
 document.addEventListener('DOMContentLoaded', async () => {
   setFooterYear();
   renderTeam();
-  await loadEventsFromSheet();   // no-op unless EVENTS_SHEET_CSV_URL is set
+  await Promise.all([loadEventsFromSheet(), loadReelsFromSheet()]);   // no-op unless EVENTS_SHEET_CSV_URL is set
   renderEvents();
   renderArchive();
 
@@ -768,3 +768,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (trigger) trigger.focus();
   });
 })();
+
+/* ==========================================================================
+   INSTAGRAM REELS FROM A GOOGLE SHEET (no code changes needed)
+   Make a sheet tab with two columns:   event  |  url
+     event = the event title or id exactly as on the site (e.g. Jamming Session)
+     url   = an Instagram reel/post link. One reel per row.
+   Publish that tab (File > Share > Publish to web > CSV) and paste the link below.
+   Leave '' to use the instagram: [...] lists inside ARCHIVE_EVENTS instead.
+   ========================================================================== */
+const REELS_SHEET_CSV_URL = '';
+
+async function loadReelsFromSheet() {
+  if (!REELS_SHEET_CSV_URL) return;
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 5000);
+    const res = await fetch(REELS_SHEET_CSV_URL, { signal: ctrl.signal, cache: 'no-cache' });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error(res.status);
+    const [head, ...rows] = parseCSV(await res.text());
+    const keys = head.map((h) => h.trim().toLowerCase());
+    const byEvent = new Map();
+    rows.forEach((r) => {
+      const row = Object.fromEntries(keys.map((k, i) => [k, (r[i] || '').trim()]));
+      const name = (row.event || row.event_id || row.title || '').toLowerCase();
+      if (!name || !/instagram\.com/i.test(row.url || '')) return;
+      if (!byEvent.has(name)) byEvent.set(name, []);
+      byEvent.get(name).push(row.url);
+    });
+    ARCHIVE_EVENTS.forEach((ev) => {
+      const list = byEvent.get(ev.id.toLowerCase()) || byEvent.get(ev.title.toLowerCase());
+      if (list && list.length) ev.instagram = list;
+    });
+  } catch (err) {
+    console.warn('Reels sheet could not be loaded; using the built-in list.', err);
+  }
+}
