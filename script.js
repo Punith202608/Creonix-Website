@@ -777,7 +777,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    Publish that tab (File > Share > Publish to web > CSV) and paste the link below.
    Leave '' to use the instagram: [...] lists inside ARCHIVE_EVENTS instead.
    ========================================================================== */
-const REELS_SHEET_CSV_URL = '';
+const REELS_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYc4TBpAugy2NVaMksuYnVS57yhVY8IH-MhjTHCg-xQ8mWCqi-CgLvBgHjj3iUbChaTvhuC5XiPaX-/pub?gid=2021322829&single=true&output=csv';
 
 async function loadReelsFromSheet() {
   if (!REELS_SHEET_CSV_URL) return;
