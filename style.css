@@ -217,7 +217,8 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 /* Hidden while scrolling down, shown again on scroll up */
 .nav.is-hidden { transform: translateY(-100%); }
 
-.nav__brand { display: inline-flex; align-items: center; flex: none; }
+.nav__brand { display: inline-flex; align-items: center; gap: .75rem; flex: none; }
+.nav__divider { width: 1px; height: 28px; background: currentColor; opacity: .3; }
 .nav__brand img { height: 44px; width: auto; transition: transform .6s var(--ease); }
 .nav__brand:hover img { transform: rotate(-3deg) scale(1.05); }
 
