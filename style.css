@@ -1232,3 +1232,26 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   .js .hero__img, .js .hero__badge, .js .hero__sticker { opacity: 1; }
   .marquee__track { animation: none; }
 }
+
+/* Admin login */
+.nav__admin { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: .5rem .8rem; border: 1px solid currentColor; opacity: .75; cursor: pointer; transition: opacity .3s; }
+.nav__admin:hover { opacity: 1; }
+.nav__admin--menu { color: inherit; margin-top: .5rem; }
+@media (max-width: 960px) { .nav__admin:not(.nav__admin--menu) { display: none; } }
+
+.admin { position: fixed; width: min(440px, 100% - 2 * var(--gutter)); margin: auto; padding: clamp(1.5rem, 4vw, 2.25rem); border: 0; background: var(--cream-200); color: var(--ink-900); }
+.admin::backdrop { background: rgba(15, 12, 11, .82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.admin[open] { animation: modalIn .6s var(--ease); }
+.admin__close { position: absolute; top: .75rem; right: .75rem; padding: .45rem .7rem; background: var(--ink-900); color: var(--cream-200); font-size: var(--fs-xs); font-weight: 700; }
+.admin__title { font-family: var(--font-display); font-weight: 400; font-size: 2.4rem; line-height: 1; text-transform: uppercase; margin-bottom: .5rem; }
+.admin__hint { color: var(--ink-600); margin-bottom: 1rem; }
+.admin__form { display: grid; gap: .9rem; }
+.admin__form[hidden], .admin__panel[hidden] { display: none; }
+.admin__form label { display: grid; gap: .3rem; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.admin__form input { padding: .75rem .85rem; border: 1px solid var(--ink-900); background: #fff; font: inherit; letter-spacing: normal; text-transform: none; color: var(--ink-900); }
+.admin__error { color: var(--red-500); font-weight: 600; }
+.admin__links { display: grid; gap: .6rem; margin-bottom: 1.25rem; }
+.admin__links a { display: block; padding: .85rem 1rem; border: 1px solid var(--ink-900); font-weight: 700; transition: background .3s, color .3s; }
+.admin__links a:hover { background: var(--ink-900); color: var(--yellow); }
+.admin__logout { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; border-bottom: 1px solid currentColor; cursor: pointer; }
+
