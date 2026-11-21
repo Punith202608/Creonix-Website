@@ -115,8 +115,8 @@ const photoSet = (id, count) => Array.from({ length: count }, (_, i) => `assets/
 const PLACEHOLDER_YT = 'aqz-KE-bpKQ';
 
 const ARCHIVE_EVENTS = [
-  { id: 'spectrum-26', title: 'Spectrum ’26', subtitle: 'Annual Cultural Fest', category: 'cultural',
-    date: '2026-03-14', venue: 'SJBIT Main Stage', cover: 'assets/gallery/spectrum-26/cover.jpg',
+  { id: 'spectrum-26', title: 'Jamming Session', subtitle: 'Annual Cultural Fest', category: 'cultural',
+    date: '2026-11-14', venue: 'MBA Lawn', cover: 'assets/gallery/spectrum-26.jpg',
     description: 'Three days, twelve stages and one very tired camera crew. We covered every performance, every crowd surge and every backstage moment of SJBIT’s biggest cultural fest — and turned it into an aftermovie seen across campus.',
     photos: photoSet('spectrum-26', 5),
     videos: [{ title: 'Official Aftermovie', youtubeId: PLACEHOLDER_YT }],
