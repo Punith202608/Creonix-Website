@@ -1028,6 +1028,16 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .socials svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .socials svg .fill { fill: currentColor; stroke: none; }
 
+/* Icon row sitting just under the navbar, right-aligned below the Join us button */
+.socials--bar {
+  position: absolute; top: var(--nav-h); right: 0; z-index: 90;
+  margin: 0; gap: 0; flex-wrap: nowrap;
+  background: var(--ink-900); color: var(--cream-200);
+}
+.socials--bar a { width: 40px; height: 40px; border: 0; }
+.socials--bar a:hover { transform: none; }
+.socials--bar svg { width: 18px; height: 18px; }
+
 
 /* ==========================================================================
    13. FOOTER + BACK TO TOP
