@@ -488,12 +488,12 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .hero__badge svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 18s linear infinite; }
 .hero__badge text { fill: currentColor; font-size: 15.5px; font-weight: 700; letter-spacing: 2.2px; font-family: var(--font-body); }
 .hero__badge-core {
-  width: 42%; aspect-ratio: 1; border-radius: 50%;
+  width: 54%; aspect-ratio: 1; border-radius: 50%;
   display: grid; place-items: center;
-  background: var(--accent-gradient); color: var(--ink-900);
-  font-size: 1.2rem; font-weight: 700;
+  background: #fff; overflow: hidden;
   transition: transform .5s var(--ease);
 }
+.hero__badge-core img { width: 100%; height: 100%; object-fit: contain; }
 .hero__badge:hover .hero__badge-core { transform: translateY(4px); }
 @keyframes spin { to { transform: rotate(360deg); } }
 
