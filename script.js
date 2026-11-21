@@ -471,6 +471,13 @@ function videoMarkup(video, ev) {
 
 /** Turns a normal Instagram reel/post link into an embeddable iframe (null if not valid) */
 function instagramMarkup(url) {
+  // Google Drive video: https://drive.google.com/file/d/<id>/view
+  const d = String(url).match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)([\w-]+)/i);
+  if (d) {
+    return '<div class="ig-embed ig-embed--drive">'
+      + '<iframe src="https://drive.google.com/file/d/' + d[1] + '/preview" title="Event reel" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>'
+      + '<a class="video-link" href="' + url + '" target="_blank" rel="noopener">Open in Drive ↗</a></div>';
+  }
   const m = String(url).match(/instagram\.com\/(?:[\w.]+\/)?(reels?|p|tv)\/([\w-]+)/i);
   if (!m) return '';
   const type = m[1].toLowerCase() === 'reels' ? 'reel' : m[1].toLowerCase();
@@ -498,7 +505,7 @@ function openEventModal(id) {
   const next = ARCHIVE_EVENTS.find((e) => e.id === list[(pos + 1) % list.length]);
 
   body.innerHTML = `
-    <figure class="modal__cover"><img src="${ev.cover}" alt="${ev.title}" /></figure>
+    <figure class="modal__cover"><img src="${ev.banner || ('assets/gallery/' + ev.id + '/banner.jpg')}" alt="${ev.title}" onerror="this.closest('figure').remove()" /></figure>
     <div class="modal__meta">
       <span>${CATEGORY_LABELS[ev.category] || ev.category}</span>
       <span>${formatDate(ev.date, { day: 'numeric', month: 'long', year: 'numeric' })}</span>
@@ -514,7 +521,7 @@ function openEventModal(id) {
     ${ev.reels.length ? `<h3 class="modal__h">Reels &amp; highlights</h3>
       <div class="modal__reels">${ev.reels.map((r) => `<a href="${r.url}" target="_blank" rel="noopener">${r.title} ↗</a>`).join('')}</div>` : ''}
 
-    ${(ev.instagram || []).length ? `<h3 class="modal__h">On Instagram</h3>
+    ${(ev.instagram || []).length ? `<h3 class="modal__h">Reels</h3>
       <div class="modal__ig">${ev.instagram.map(instagramMarkup).join('')}</div>` : ''}
 
     <h3 class="modal__h">Photographs ·${pad(ev.photos.length)}</h3>
@@ -773,7 +780,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    INSTAGRAM REELS FROM A GOOGLE SHEET (no code changes needed)
    Make a sheet tab with two columns:   event  |  url
      event = the event title or id exactly as on the site (e.g. Jamming Session)
-     url   = an Instagram reel/post link. One reel per row.
+     url   = an Instagram or Google Drive video link. One reel per row.
    Publish that tab (File > Share > Publish to web > CSV) and paste the link below.
    Leave '' to use the instagram: [...] lists inside ARCHIVE_EVENTS instead.
    ========================================================================== */
@@ -793,7 +800,7 @@ async function loadReelsFromSheet() {
     rows.forEach((r) => {
       const row = Object.fromEntries(keys.map((k, i) => [k, (r[i] || '').trim()]));
       const name = (row.event || row.event_id || row.title || '').toLowerCase();
-      if (!name || !/instagram\.com/i.test(row.url || '')) return;
+      if (!name || !/instagram\.com|drive\.google\.com/i.test(row.url || '')) return;
       if (!byEvent.has(name)) byEvent.set(name, []);
       byEvent.get(name).push(row.url);
     });
