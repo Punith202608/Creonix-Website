@@ -833,3 +833,117 @@ async function loadReelsFromSheet() {
     console.warn('Event media sheet could not be loaded; using the built-in lists.', err);
   }
 }
+
+/* ==========================================================================
+   ADMIN LOGIN (Supabase)
+   Login only: after logging in it lists the links stored in the admin_links table.
+   The URL and publishable key below are public by design. The table is protected by
+   Row Level Security, so only a logged-in admin can read it.
+   ========================================================================== */
+(function () {
+  const SUPABASE_URL = 'https://oqyiwqgyrkialphfepnq.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_aeb6i3-hSPd3adJsjCoUTA_XqKUs9JK';
+  const SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js';
+
+  const modal = document.getElementById('adminModal');
+  if (!modal) return;
+  const form = document.getElementById('adminForm');
+  const panel = document.getElementById('adminPanel');
+  const list = document.getElementById('adminLinks');
+  const errorBox = document.getElementById('adminError');
+  const submit = form.querySelector('button[type="submit"]');
+  let client = null;
+
+  // The login library is only downloaded when someone clicks Admin
+  function loadClient() {
+    if (client) return Promise.resolve(client);
+    return new Promise(function (resolve, reject) {
+      function ready() {
+        client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        resolve(client);
+      }
+      if (window.supabase && window.supabase.createClient) return ready();
+      const s = document.createElement('script');
+      s.src = SDK;
+      s.onload = ready;
+      s.onerror = function () { reject(new Error('Could not load the login library.')); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.hidden = !msg; }
+  function showForm() { panel.hidden = true; form.hidden = false; }
+
+  async function showLinks() {
+    const res = await client.from('admin_links').select('label,url').order('sort');
+    if (res.error) { showForm(); showError('Could not load the links. Please try again.'); return; }
+    list.textContent = '';
+    (res.data || []).forEach(function (row) {
+      if (!/^https?:\/\//i.test(row.url)) return;
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = row.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = row.label + ' ↗';
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+    form.hidden = true;
+    panel.hidden = false;
+  }
+
+  async function openAdmin() {
+    // If the mobile menu is open, close it first
+    if (document.documentElement.classList.contains('menu-open')) {
+      const toggle = document.getElementById('navToggle');
+      if (toggle) toggle.click();
+    }
+    showError('');
+    showForm();
+    modal.showModal();
+    document.documentElement.classList.add('modal-open');
+    try {
+      await loadClient();
+      const s = await client.auth.getSession();
+      if (s.data && s.data.session) await showLinks();
+    } catch (err) {
+      showError('The login service is not available right now.');
+    }
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    showError('');
+    submit.disabled = true;
+    try {
+      await loadClient();
+      const res = await client.auth.signInWithPassword({
+        email: form.elements.email.value.trim(),
+        password: form.elements.password.value
+      });
+      if (res.error) { showError('Wrong email or password.'); return; }
+      form.reset();
+      await showLinks();
+    } catch (err) {
+      showError('The login service is not available right now.');
+    } finally {
+      submit.disabled = false;
+    }
+  });
+
+  document.getElementById('adminLogout').addEventListener('click', async function () {
+    try { await client.auth.signOut(); } catch (err) { /* ignore */ }
+    list.textContent = '';
+    showError('');
+    showForm();
+  });
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-admin-open]')) { e.preventDefault(); openAdmin(); return; }
+    if (e.target === modal || e.target.closest('[data-admin-close]')) modal.close();
+  });
+  modal.addEventListener('close', function () {
+    document.documentElement.classList.remove('modal-open');
+  });
+})();
