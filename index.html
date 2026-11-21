@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CREONIX — Official Social Media &amp; Creative Club</title>
+  <meta name="description" content="CREONIX is the official social media and creative club of our college — photography, film, reels, design and campus storytelling." />
+  <meta name="theme-color" content="#B3141C" />
+
+  <!-- REPLACE: favicon uses the same logo file -->
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+
+  <!-- FONTS — change these here AND in the --font-* variables at the top of style.css -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+  <!-- Marks that JavaScript is running (used to enable animations safely) -->
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <meta name="google-site-verification" content="hiDNy0gv0ux4etP1O5m4II75FfeiMfJ8_CrtLWV8974" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#home" aria-label="CREONIX SJBIT — back to top">
+      <!-- REPLACE: your logo → assets/logo.png (any shape works; it is shown 44px tall) -->
+      <img src="assets/logo.png" alt="CREONIX logo" width="78" height="44" />
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <ul>
+        <li><a class="nav__link" href="#home"><sup>01</sup>Home</a></li>
+        <li><a class="nav__link" href="#about"><sup>02</sup>About</a></li>
+        <li><a class="nav__link" href="#team"><sup>03</sup>Team</a></li>
+        <li><a class="nav__link" href="#events"><sup>04</sup>Events</a></li>
+        <li><a class="nav__link" href="#gallery"><sup>05</sup>Gallery</a></li>
+        <li><a class="nav__link" href="#contact"><sup>06</sup>Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav__social">
+      <a href="https://www.instagram.com/creonix.sjbit/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.4" cy="6.6" r="1.1" class="fill" /></svg></a>
+      <a href="https://www.youtube.com/@creonix" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5" /><path d="M10 9.2v5.6l4.8-2.8z" class="fill" /></svg></a>
+    </div>
+
+    <a class="nav__join" href="#contact">Join us <span aria-hidden="true">↗</span></a>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile full-screen menu (opened by the burger button) -->
+  <div class="mobile-menu" id="mobileMenu" inert>
+    <nav aria-label="Mobile">
+      <ol>
+        <li><a href="#home"><span>01</span>Home</a></li>
+        <li><a href="#about"><span>02</span>About</a></li>
+        <li><a href="#team"><span>03</span>Team</a></li>
+        <li><a href="#events"><span>04</span>Events</a></li>
+        <li><a href="#gallery"><span>05</span>Gallery</a></li>
+        <li><a href="#contact"><span>06</span>Contact</a></li>
+      </ol>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a class="btn btn--accent" href="#contact">Join us ↗</a>
+      <a href="https://www.instagram.com/creonix.sjbit/" target="_blank" rel="noopener">@creonix.sjbit</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- =====================================================
+         01 · HERO
+         ===================================================== -->
+    <section class="hero" id="home" aria-label="Introduction">
+      <!-- REPLACE: hero background → assets/hero-bg.jpg (set in style.css → .hero__bg) -->
+      <div class="hero__bg" aria-hidden="true"></div>
+
+      <!-- Info strip (top of hero, like an editorial masthead) — edit freely -->
+      <ul class="hero__strip">
+        <li>College Social Media Club</li>
+        <li>Est. 2026</li>
+        <li>SJBIT Campus</li>
+        <li>Photo / Film / Design / Reels</li>
+      </ul>
+
+      <div class="hero__stage">
+        <!-- Big heading. Each line rises in on load. "Sjbit" mirrors the blackletter in the logo. -->
+        <h1 class="hero__title">
+          <span class="hero__line hero__line--brand"><span class="ch" style="--i:0">Creonix<span class="hero__sjbit" aria-hidden="true">Sjbit</span></span></span>
+          <span class="hero__line"><span class="ch" style="--i:1">Captures</span></span>
+          <span class="hero__line"><span class="ch" style="--i:2">Campus<i>.</i></span></span>
+        </h1>
+        <!-- Outline copy that sits ABOVE the photos, so the letters seem to wrap around them -->
+        <div class="hero__title hero__title--ghost" aria-hidden="true">
+          <span class="hero__line hero__line--brand"><span class="ch" style="--i:0">Creonix</span></span>
+          <span class="hero__line"><span class="ch" style="--i:1">Captures</span></span>
+          <span class="hero__line"><span class="ch" style="--i:2">Campus<i>.</i></span></span>
+        </div>
+
+        <!-- Layered photo collage. REPLACE: assets/site/hero-1.jpg, hero-2.jpg, hero-3.jpg
+             Tip: transparent PNG cut-outs of people look amazing here (like the reference). -->
+        <div class="hero__collage">
+          <figure class="hero__img hero__img--a" data-parallax="0.06">
+            <img src="assets/site/hero-1." alt="Crowd at the SJBIT cultural fest under stage lights" width="800" height="1000" />
+            <figcaption>Fig. 01 — Spectrum ’26</figcaption>
+          </figure>
+          <figure class="hero__img hero__img--b" data-parallax="-0.04">
+            <img src="assets/site/hero-2.jpg" alt="Students at a campus event" width="1000" height="680" />
+            <figcaption>Fig. 02 — Techverse</figcaption>
+          </figure>
+          <figure class="hero__img hero__img--c" data-parallax="0.12">
+            <img src="assets/site/hero-3.jpg" alt="Behind the scenes of a CREONIX shoot" width="640" height="800" />
+          </figure>
+          <span class="hero__sticker"><b>✺</b> Applications open</span>
+          <!-- Rotating badge -->
+          <a class="hero__badge" href="#about" aria-label="Scroll to About">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <defs><path id="badgeCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
+              <text><textPath href="#badgeCircle">CREATE • CAPTURE • CONNECT • CREONIX • </textPath></text>
+            </svg>
+            <span class="hero__badge-core">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__bottom">
+        <span class="hero__tag">SJBIT</span>
+        <p class="hero__intro">
+          The official social media &amp; creative club of SJBIT. We shoot the fests, cut the reels,
+          design the posters and tell <em>every</em> campus story worth telling.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn btn--dark" href="#gallery">Explore our work</a>
+          <a class="btn btn--light" href="#team">Meet the team</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scrolling ticker -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Photography</span><i>✺</i><span>Videography</span><i>✺</i><span>Reels</span><i>✺</i><span>Posters</span><i>✺</i><span>Aftermovies</span><i>✺</i><span>Campus Stories</span><i>✺</i>
+        <span>Photography</span><i>✺</i><span>Videography</span><i>✺</i><span>Reels</span><i>✺</i><span>Posters</span><i>✺</i><span>Aftermovies</span><i>✺</i><span>Campus Stories</span><i>✺</i>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         02 · ABOUT
+         ===================================================== -->
+    <section class="about section" id="about">
+      <div class="container">
+        <div class="section-tag" data-reveal><span>(02)</span> About CREONIX <i></i> Who we are</div>
+
+        <!-- Headline with inline images. REPLACE inline images → assets/site/inline-1.jpg / inline-2.jpg -->
+        <h2 class="about__headline" data-reveal>
+          The campus story,
+          <span class="inline-img"><img src="assets/site/inline-1.jpg" alt="" width="400" height="200" /></span>
+          told in <em>reels,</em> posters
+          <span class="inline-img inline-img--tilt"><img src="assets/site/inline-2.jpg" alt="" width="400" height="200" /></span>
+          &amp; frames.
+        </h2>
+
+        <div class="about__grid">
+          <!-- REPLACE: about photos → assets/site/about-1.jpg and about-2.jpg -->
+          <div class="about__collage" data-reveal>
+            <figure class="about__img about__img--main"><img src="assets/site/about-1.jpg" alt="CREONIX photographers covering an event" loading="lazy" width="900" height="1150" /></figure>
+            <figure class="about__img about__img--small"><img src="assets/site/about-2.jpg" alt="CREONIX team editing a reel" loading="lazy" width="900" height="700" /></figure>
+            <span class="about__stamp">On every<br />stage since<br /><b>2026</b></span>
+          </div>
+
+          <div class="about__text">
+            <p class="about__lead" data-reveal>
+              CREONIX is the <strong>official social media and creative club</strong> of our college —
+              a crew of photographers, filmmakers, designers and writers who make campus life impossible to scroll past.
+            </p>
+            <p data-reveal>
+              From the first freshers’ welcome to the last convocation cheer, we document, design and share the
+              moments that define our college — and we build the skills of every member along the way.
+            </p>
+
+            <!-- Stats: change data-count to update the number -->
+            <dl class="stats" data-reveal>
+              <div><dt>Events covered</dt><dd data-count="120" data-suffix="+">0</dd></div>
+              <div><dt>Monthly reach</dt><dd data-count="250" data-suffix="K">0</dd></div>
+              <div><dt>Posts &amp; reels</dt><dd data-count="900" data-suffix="+">0</dd></div>
+              <div><dt>Crew members</dt><dd data-count="40" data-suffix="">0</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- What we do -->
+        <div class="services">
+          <h3 class="services__title" data-reveal>What we <em>do</em></h3>
+          <ol class="services__list">
+            <li data-reveal><span class="services__num">01</span><h4>Social presence</h4><p>Managing and strengthening the college’s official social media accounts.</p></li>
+            <li data-reveal><span class="services__num">02</span><h4>Event coverage</h4><p>Covering every college event through photography and videography.</p></li>
+            <li data-reveal><span class="services__num">03</span><h4>Reels &amp; films</h4><p>Creating reels, aftermovies, videos and promotional content.</p></li>
+            <li data-reveal><span class="services__num">04</span><h4>Design studio</h4><p>Designing posters, graphics and announcements for the whole campus.</p></li>
+            <li data-reveal><span class="services__num">05</span><h4>Campus archive</h4><p>Documenting campus activities so no moment is ever lost.</p></li>
+            <li data-reveal><span class="services__num">06</span><h4>Amplify wins</h4><p>Promoting college events, achievements and the people behind them.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         03 · TEAM  (cards are generated from the TEAM array in script.js)
+         ===================================================== -->
+    <section class="team section" id="team">
+      <div class="container">
+        <div class="section-tag section-tag--light" data-reveal><span>(03)</span> Our Team <i></i> <b id="teamCount">00</b> creators</div>
+        <h2 class="team__title" data-reveal><em>The</em> Crew</h2>
+        <p class="team__intro" data-reveal>The people behind the lens, the timeline and the typeface.</p>
+
+        <div class="team__leads" id="teamLeads"></div>
+
+        <h3 class="team__subhead" data-reveal>Core team</h3>
+        <div class="team__core" id="teamCore"></div>
+
+        <h3 class="team__subhead" data-reveal>Members</h3>
+        <div class="team__members" id="teamMembers"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         04 · UPCOMING EVENTS  (generated from UPCOMING_EVENTS in script.js)
+         ===================================================== -->
+    <section class="events section" id="events">
+      <div class="container">
+        <div class="section-tag" data-reveal><span>(04)</span> Upcoming Events <i></i> Save the date</div>
+        <h2 class="events__title" data-reveal>What’s <span class="outline">next</span></h2>
+
+        <div class="events__featured" id="eventFeatured"></div>
+        <ul class="events__list" id="eventList"></ul>
+
+        <div class="events__more">
+          <button class="btn btn--dark" id="eventsMore" aria-expanded="false">Explore all events <span class="btn__arrow" aria-hidden="true">↓</span></button>
+        </div>
+      </div>
+      <!-- Floating poster preview that follows the cursor on desktop -->
+      <div class="event-preview" id="eventPreview" aria-hidden="true"><img src="assets/events/upcoming-01.jpg" alt="" /></div>
+    </section>
+
+    <!-- =====================================================
+         05 · GALLERY / CREONIX ARCHIVES  (generated from ARCHIVE_EVENTS in script.js)
+         ===================================================== -->
+    <section class="archive section" id="gallery">
+      <div class="container">
+        <div class="section-tag section-tag--light" data-reveal><span>(05)</span> Gallery <i></i> Every event, preserved</div>
+        <h2 class="archive__title" data-reveal>The <span class="outline">Creonix</span><br />Archives</h2>
+
+        <div class="archive__filters" role="group" aria-label="Filter archive by category">
+          <button class="filter is-active" data-filter="all" aria-pressed="true">All <sup></sup></button>
+          <button class="filter" data-filter="cultural" aria-pressed="false">Cultural <sup></sup></button>
+          <button class="filter" data-filter="technical" aria-pressed="false">Technical <sup></sup></button>
+          <button class="filter" data-filter="sports" aria-pressed="false">Sports <sup></sup></button>
+          <button class="filter" data-filter="other" aria-pressed="false">Other events <sup></sup></button>
+        </div>
+
+        <div class="archive__grid" id="archiveGrid"></div>
+        <p class="archive__empty" id="archiveEmpty" hidden>No stories in this category yet — check back after the next event.</p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         06 · CONTACT / JOIN
+         ===================================================== -->
+    <section class="contact section" id="contact">
+      <div class="container">
+        <div class="section-tag section-tag--light" data-reveal><span>(06)</span> Join CREONIX <i></i> Applications open</div>
+
+        <h2 class="contact__title" data-reveal>
+          <span>Got the eye?</span>
+          <span class="contact__title-accent">Join the crew.</span>
+        </h2>
+
+        <div class="contact__grid">
+          <div class="contact__pitch" data-reveal>
+            <p>Shooters, editors, designers, writers, strategists — or just someone who loves campus life and wants to learn.
+              No experience needed. Bring your curiosity; we’ll bring the cameras.</p>
+            <!-- JOIN THE CLUB: replace the href with your Google Form link, e.g. href="https://forms.gle/abc123" target="_blank" -->
+            <a class="btn btn--accent btn--big" href="mailto:creonix@sjbit.edu.in?subject=I%20want%20to%20join%20CREONIX">Join the club <span class="btn__arrow" aria-hidden="true">↗</span></a>
+          </div>
+
+          <!-- Contact details: edit the href (link) and the text of each line -->
+          <ul class="contact__info" data-reveal>
+            <li><span>Instagram</span><a href="https://www.instagram.com/creonix.sjbit/" target="_blank" rel="noopener">@creonix.sjbit</a></li>
+            <li><span>Email</span><a href="mailto:creonix@sjbit.edu.in">creonix@sjbit.edu.in</a></li>
+            <li><span>Phone</span><a href="tel:+910000000000">+91 00000 00000</a></li>
+            <li><span>Find us</span><p>Media Room, Block A, SJBIT Campus</p></li>
+          </ul>
+        </div>
+
+        <ul class="socials" aria-label="Social media">
+          <li><a href="https://www.instagram.com/creonix.sjbit/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.4" cy="6.6" r="1.1" class="fill" /></svg></a></li>
+          <li><a href="https://www.youtube.com/@creonix" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5" /><path d="M10 9.2v5.6l4.8-2.8z" class="fill" /></svg></a></li>
+          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M7.5 10.5v6M7.5 7.5v.01M11 16.5v-6m0 2.6c0-1.6 1-2.6 2.4-2.6s2.1 1 2.1 2.6v3.4" /></svg></a></li>
+          <li><a href="https://x.com/" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20" /></svg></a></li>
+          <li><a href="mailto:creonix@sjbit.edu.in" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3.5 6l8.5 7 8.5-7" /></svg></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer class="footer">
+    <div class="footer__top">
+      <a class="nav__brand" href="#home"><img src="assets/logo.png" alt="CREONIX logo" width="78" height="44" /></a>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#about">About</a><a href="#team">Team</a><a href="#events">Events</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+      </nav>
+      <p>© <span id="year">2026</span> CREONIX · SJBIT. Made by the crew.</p>
+    </div>
+    <div class="footer__word" aria-hidden="true">CREONIX</div>
+  </footer>
+
+  <!-- Back-to-top button -->
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <!-- =====================================================
+       EVENT DETAIL MODAL (filled by script.js when an archive card is clicked)
+       ===================================================== -->
+  <dialog class="modal" id="eventModal" aria-labelledby="modalTitle">
+    <div class="modal__bar">
+      <span class="modal__brand">CREONIX / Archives</span>
+      <button class="modal__close" id="modalClose" aria-label="Close">Close ✕</button>
+    </div>
+    <div class="modal__body" id="modalBody"></div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
