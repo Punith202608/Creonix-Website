@@ -116,7 +116,7 @@ const PLACEHOLDER_YT = 'aqz-KE-bpKQ';
 
 const ARCHIVE_EVENTS = [
   { id: 'spectrum-26', title: 'Jamming Session', subtitle: 'Annual Cultural Fest', category: 'cultural',
-    date: '2026-11-14', venue: 'MBA Lawn', cover: 'assets/gallery/spectrum-26.jpg',
+    date: '2026-11-14', venue: 'MBA Lawn', cover: 'assets/gallery/spectrum-26/cover.jpg',
     description: 'Three days, twelve stages and one very tired camera crew. We covered every performance, every crowd surge and every backstage moment of SJBIT’s biggest cultural fest — and turned it into an aftermovie seen across campus.',
     photos: photoSet('spectrum-26', 5),
     videos: [{ title: 'Official Aftermovie', youtubeId: PLACEHOLDER_YT }],
