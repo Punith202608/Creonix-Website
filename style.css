@@ -720,11 +720,13 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .member--lead .member__photo { aspect-ratio: 5 / 6; }
 .member--lead .member__num { font-size: var(--fs-sm); }
 
-/* Core: 3-column grid with a staggered middle column */
-.team__core { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2.5vw, 2.5rem); }
-.team__core .member:nth-child(3n + 2) { transform: translateY(3rem); }
-.js .team__core .member:nth-child(3n + 2)[data-reveal] { transform: translateY(calc(3rem + 40px)); }
-.js .team__core .member:nth-child(3n + 2)[data-reveal].is-visible { transform: translateY(3rem); }
+/* Core: 4-column grid (smaller cards) with every second card staggered */
+.team__core { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem) clamp(.8rem, 1.6vw, 1.5rem); }
+.team__core .member:nth-child(even) { transform: translateY(2rem); }
+.js .team__core .member:nth-child(even)[data-reveal] { transform: translateY(calc(2rem + 40px)); }
+.js .team__core .member:nth-child(even)[data-reveal].is-visible { transform: translateY(2rem); }
+.team__core .member__name { font-size: 1.35rem; }
+.team__core .member__bio { font-size: var(--fs-xs); margin-top: .5rem; }
 
 /* Members: compact grid */
 .team__members { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5rem 1rem; padding-top: 2rem; }
