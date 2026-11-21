@@ -707,18 +707,19 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .member__social { display: inline-block; margin-top: .6rem; font-size: var(--fs-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid currentColor; }
 .member__social:hover { color: var(--yellow); }
 
-/* Leads: two large asymmetric cards */
+/* Leads: same card size as the core members (same 4-column grid, left-aligned) */
 .team__leads {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: clamp(1.5rem, 5vw, 6rem);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem) clamp(.8rem, 1.6vw, 1.5rem);
   margin-top: clamp(3rem, 6vw, 5rem);
   align-items: start;
 }
-.team__leads .member:nth-child(2) { margin-top: clamp(4rem, 12vw, 12rem); }
-.member--lead .member__name { font-size: clamp(2.2rem, 1.2rem + 3.5vw, 4.5rem); }
-.member--lead .member__photo { aspect-ratio: 5 / 6; }
-.member--lead .member__num { font-size: var(--fs-sm); }
+.team__leads .member:nth-child(even) { transform: translateY(2rem); }
+.js .team__leads .member:nth-child(even)[data-reveal] { transform: translateY(calc(2rem + 40px)); }
+.js .team__leads .member:nth-child(even)[data-reveal].is-visible { transform: translateY(2rem); }
+.team__leads .member__name { font-size: 1.35rem; }
+.team__leads .member__bio { font-size: var(--fs-xs); margin-top: .5rem; }
 
 /* Core: 4-column grid (smaller cards) with every second card staggered */
 .team__core { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem) clamp(.8rem, 1.6vw, 1.5rem); }
@@ -1103,11 +1104,13 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   .services__list li { grid-template-columns: 56px 1fr; }
   .services__list p { grid-column: 2; }
 
-  .team__core { grid-template-columns: repeat(2, 1fr); }
+  .team__core, .team__leads { grid-template-columns: repeat(2, 1fr); }
   .team__core .member:nth-child(3n + 2),
   .js .team__core .member:nth-child(3n + 2)[data-reveal].is-visible { transform: none; }
   .team__core .member:nth-child(even),
-  .js .team__core .member:nth-child(even)[data-reveal].is-visible { transform: translateY(2.5rem); }
+  .js .team__core .member:nth-child(even)[data-reveal].is-visible,
+  .team__leads .member:nth-child(even),
+  .js .team__leads .member:nth-child(even)[data-reveal].is-visible { transform: translateY(2.5rem); }
 
   .events__featured { grid-template-columns: 1fr; }
   .featured__poster { max-width: 440px; }
@@ -1154,11 +1157,9 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   .services__list p { grid-column: auto; }
   .services__list li:hover { padding-left: 1rem; }
 
-  .team__leads { grid-template-columns: 1fr; }
-  .team__leads .member:nth-child(2) { margin-top: 0; width: 88%; margin-left: auto; }
-  .team__core { gap: 1.5rem .9rem; }
-  .team__core .member__bio { display: none; }
-  .team__core .member__name { font-size: 1.3rem; }
+  .team__leads, .team__core { gap: 1.5rem .9rem; }
+  .team__leads .member__bio, .team__core .member__bio { display: none; }
+  .team__leads .member__name, .team__core .member__name { font-size: 1.3rem; }
   .team__members { grid-template-columns: repeat(2, 1fr); }
 
   .featured__meta { grid-template-columns: 1fr 1fr; gap: 1rem; }
