@@ -1158,7 +1158,6 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   .services__list li:hover { padding-left: 1rem; }
 
   .team__leads, .team__core { gap: 1.5rem .9rem; }
-  .team__leads .member__bio, .team__core .member__bio { display: none; }
   .team__leads .member__name, .team__core .member__name { font-size: 1.3rem; }
   .team__members { grid-template-columns: repeat(2, 1fr); }
 
