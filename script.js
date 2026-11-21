@@ -744,3 +744,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Triggers the hero entrance animation
   requestAnimationFrame(() => document.body.classList.add('is-loaded'));
 });
+
+/* ==========================================================================
+   ABOUT CREATOR POP-UP  (button: [data-creator-open] in the hero strip)
+   ========================================================================== */
+(function () {
+  const modal = document.getElementById('creatorModal');
+  if (!modal) return;
+  let trigger = null;
+  document.addEventListener('click', (e) => {
+    const open = e.target.closest('[data-creator-open]');
+    if (open) {
+      trigger = open;
+      modal.showModal();
+      document.documentElement.classList.add('modal-open');
+      return;
+    }
+    // Close: the X button or a click on the dark backdrop
+    if (e.target === modal || e.target.closest('[data-creator-close]')) modal.close();
+  });
+  modal.addEventListener('close', () => {
+    document.documentElement.classList.remove('modal-open');
+    if (trigger) trigger.focus();
+  });
+})();
