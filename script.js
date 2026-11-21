@@ -777,14 +777,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 })();
 
 /* ==========================================================================
-   INSTAGRAM REELS FROM A GOOGLE SHEET (no code changes needed)
-   Make a sheet tab with two columns:   event  |  url
+   EVENT MEDIA FROM A GOOGLE SHEET (no code changes needed)
+   Use the "reels" tab. Columns:   event  |  type  |  (anything)  |  url
      event = the event title or id exactly as on the site (e.g. Jamming Session)
-     url   = an Instagram or Google Drive video link. One reel per row.
-   Publish that tab (File > Share > Publish to web > CSV) and paste the link below.
-   Leave '' to use the instagram: [...] lists inside ARCHIVE_EVENTS instead.
+     type  = reel (or leave empty) | photo | banner | cover
+     url   = a Google Drive share link (file shared as "Anyone with the link"),
+             or an Instagram link for reels. One item per row.
+       reel   -> a video that plays in the pop-up (3 per row)
+       photo  -> a picture in the pop-up photo grid (replaces the folder photos)
+       banner -> the wide picture at the top of the pop-up
+       cover  -> the picture on the event's gallery card
+   Publish the tab (File > Share > Publish to web > CSV) and paste the link below.
+   Leave '' to use the lists inside ARCHIVE_EVENTS instead.
    ========================================================================== */
 const REELS_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYc4TBpAugy2NVaMksuYnVS57yhVY8IH-MhjTHCg-xQ8mWCqi-CgLvBgHjj3iUbChaTvhuC5XiPaX-/pub?gid=2021322829&single=true&output=csv';
+
+/** Google Drive share link -> a picture URL that works in <img> (Google resizes it for us) */
+function driveImage(url, width) {
+  const m = String(url).match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)([\w-]+)/i);
+  return m ? 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w' + width : url;
+}
 
 async function loadReelsFromSheet() {
   if (!REELS_SHEET_CSV_URL) return;
@@ -796,19 +808,28 @@ async function loadReelsFromSheet() {
     if (!res.ok) throw new Error(res.status);
     const [head, ...rows] = parseCSV(await res.text());
     const keys = head.map((h) => h.trim().toLowerCase());
-    const byEvent = new Map();
+    const groups = new Map();   // event name -> { reel: [], photo: [], banner, cover }
     rows.forEach((r) => {
       const row = Object.fromEntries(keys.map((k, i) => [k, (r[i] || '').trim()]));
       const name = (row.event || row.event_id || row.title || '').toLowerCase();
-      if (!name || !/instagram\.com|drive\.google\.com/i.test(row.url || '')) return;
-      if (!byEvent.has(name)) byEvent.set(name, []);
-      byEvent.get(name).push(row.url);
+      const url = row.url || '';
+      if (!name || !url) return;
+      const type = (row.type || 'reel').toLowerCase();
+      if (!groups.has(name)) groups.set(name, { reel: [], photo: [], banner: '', cover: '' });
+      const g = groups.get(name);
+      if (type === 'banner' || type === 'cover') g[type] = url;
+      else if (type === 'photo') g.photo.push(url);
+      else if (/instagram\.com|drive\.google\.com/i.test(url)) g.reel.push(url);
     });
     ARCHIVE_EVENTS.forEach((ev) => {
-      const list = byEvent.get(ev.id.toLowerCase()) || byEvent.get(ev.title.toLowerCase());
-      if (list && list.length) ev.instagram = list;
+      const g = groups.get(ev.id.toLowerCase()) || groups.get(ev.title.toLowerCase());
+      if (!g) return;
+      if (g.reel.length) ev.instagram = g.reel;
+      if (g.photo.length) ev.photos = g.photo.map((u) => driveImage(u, 1200));
+      if (g.banner) ev.banner = driveImage(g.banner, 1800);
+      if (g.cover) ev.cover = driveImage(g.cover, 1000);
     });
   } catch (err) {
-    console.warn('Reels sheet could not be loaded; using the built-in list.', err);
+    console.warn('Event media sheet could not be loaded; using the built-in lists.', err);
   }
 }
