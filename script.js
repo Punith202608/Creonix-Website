@@ -33,9 +33,9 @@ const TEAM = [
     bio: 'Keeps the crew in sync and the deadlines honest. Our go-to for storytelling, scripts and big-picture ideas.' },
 
   // ---- Core team ----
-  { name: 'Kabir Shetty',  role: 'Creative Head',        group: 'core', dept: 'ECE · 3rd Year',  photo: 'assets/team/member-03.jpg', bio: 'Sets the visual direction for every campaign we ship.' },
-  { name: 'Ananya Iyer',   role: 'Photography Lead',     group: 'core', dept: 'MECH · 3rd Year', photo: 'assets/team/member-04.jpg', bio: 'Leads the shooters at every fest, match and ceremony.' },
-  { name: 'Rohan Gowda',   role: 'Videography Lead',     group: 'core', dept: 'CSE · 3rd Year',  photo: 'assets/team/member-05.jpg', bio: 'Aftermovies, highlight cuts and the occasional drone shot.' },
+  { name: 'Sanjith',  role: 'Editing table head',        group: 'core', dept: 'ECE · 3rd Year',  photo: 'assets/team/member-03.jpg', bio: 'Sets the visual direction for every campaign we ship.' },
+  { name: 'Sahana',   role: 'Creative design Lead',     group: 'core', dept: 'MECH · 3rd Year', photo: 'assets/team/member-04.jpg', bio: 'Leads the shooters at every fest, match and ceremony.' },
+  { name: 'Harshitha',   role: 'podcast Lead',     group: 'core', dept: 'CSE · 3rd Year',  photo: 'assets/team/member-05.jpg', bio: 'Aftermovies, highlight cuts and the occasional drone shot.' },
   { name: 'Meera Nair',    role: 'Design Lead',          group: 'core', dept: 'AIML · 3rd Year', photo: 'assets/team/member-06.jpg', bio: 'Posters, carousels and the CREONIX visual system.' },
   { name: 'Ishaan Kulkarni', role: 'Content & Copy Lead', group: 'core', dept: 'ISE · 3rd Year', photo: 'assets/team/member-07.jpg', bio: 'Captions that land and scripts that hook in 3 seconds.' },
   { name: 'Sara Thomas',   role: 'Social Media Manager', group: 'core', dept: 'CSE · 3rd Year',  photo: 'assets/team/member-08.jpg', bio: 'Schedules, analytics and keeping the grid alive.' },
