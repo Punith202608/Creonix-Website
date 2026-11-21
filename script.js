@@ -27,9 +27,9 @@
    ========================================================================== */
 const TEAM = [
   // ---- Leads ----
-  { name: 'Aarav Mehta',   role: 'President',       group: 'lead', dept: 'CSE · 4th Year', photo: 'assets/team/member-01.jpg', instagram: '',
+  { name: 'Aishwarya',   role: 'President',       group: 'lead', dept: 'AI/ML · 2nd Year', photo: 'assets/team/member-01.jpg', instagram: '',
     bio: 'Runs the show — from planning fest coverage to keeping our feed on brand. Shoots on a 50mm, thinks in campaigns.' },
-  { name: 'Diya Rao',      role: 'Vice President',  group: 'lead', dept: 'ISE · 4th Year', photo: 'assets/team/member-02.jpg', instagram: '',
+  { name: 'Siri Suresh',      role: 'Vice President',  group: 'lead', dept: 'EEE · 2nd Year', photo: 'assets/team/member-02.jpg', instagram: '',
     bio: 'Keeps the crew in sync and the deadlines honest. Our go-to for storytelling, scripts and big-picture ideas.' },
 
   // ---- Core team ----
